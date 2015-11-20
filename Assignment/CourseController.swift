@@ -47,7 +47,7 @@ class CourseController: UIViewController {
             "melmasry1@my.bcit.ca",
             "SW2-121",
             "By appointment only",
-            "This hands-on course is designed for those who are already familiar with an Object Oriented programming language such as Java or C++. Students are introduced to web application development using C# and the Microsoft ASP.NET Framework."
+            "This hands-on course is designed for those who are already familiar with an Object Oriented programming language such as Java or C++. Students are introduced to web application  .   development using C# and the Microsoft ASP.NET Framework."
         ]
     ]
 

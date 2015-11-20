@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		675523C21BFEFB9D008CE5AA /* NewsItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675523C11BFEFB9D008CE5AA /* NewsItemController.swift */; settings = {ASSET_TAGS = (); }; };
+		675523C21BFEFB9D008CE5AA /* NewsItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675523C11BFEFB9D008CE5AA /* NewsItemController.swift */; };
 		675F97601BF1587800EF5F15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675F975F1BF1587800EF5F15 /* AppDelegate.swift */; };
 		675F97641BF1587800EF5F15 /* CoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675F97631BF1587800EF5F15 /* CoursesViewController.swift */; };
 		675F97671BF1587900EF5F15 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 675F97651BF1587900EF5F15 /* Main.storyboard */; };
 		675F97691BF1587900EF5F15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 675F97681BF1587900EF5F15 /* Assets.xcassets */; };
 		675F976C1BF1587900EF5F15 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 675F976A1BF1587900EF5F15 /* LaunchScreen.storyboard */; };
-		67AFD6621BFE2FFE0061E232 /* CalenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AFD6611BFE2FFE0061E232 /* CalenderViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		67AFD6641BFE30890061E232 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AFD6631BFE30890061E232 /* NewsViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		67AFD6EC1BFE62240061E232 /* CourseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AFD6EB1BFE62240061E232 /* CourseController.swift */; settings = {ASSET_TAGS = (); }; };
+		67AFD6621BFE2FFE0061E232 /* CalenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AFD6611BFE2FFE0061E232 /* CalenderViewController.swift */; };
+		67AFD6641BFE30890061E232 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AFD6631BFE30890061E232 /* NewsViewController.swift */; };
+		67AFD6EC1BFE62240061E232 /* CourseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AFD6EB1BFE62240061E232 /* CourseController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -107,7 +107,7 @@
 				TargetAttributes = {
 					675F975B1BF1587800EF5F15 = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = XPY6VQALP7;
+						DevelopmentTeam = BJV57HV25X;
 					};
 				};
 			};
@@ -265,10 +265,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Assignment/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bchau.Assignment;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -276,10 +280,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Assignment/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bchau.Assignment;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
