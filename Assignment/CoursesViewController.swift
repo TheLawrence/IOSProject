@@ -12,7 +12,7 @@ class CoursesViewController: UITableViewController {
 
    
     
-    var names = ["Comp": ["4977", "4976", "4711", "4560", "4735"], "BLAW": ["3600"]]
+    var names = ["COMP": ["4977", "4976", "4711", "4560", "4735"], "BLAW": ["3600"]]
     
     
     struct Objects {
@@ -26,7 +26,7 @@ class CoursesViewController: UITableViewController {
         super.viewDidLoad()
         self.title = "Courses"
         for (key, value) in names {
-            print("\(key) -> \(value)")
+            //print("\(key) -> \(value)")
             objectArray.append(Objects(sectionName: key, sectionObjects: value))
         }
     }
@@ -64,17 +64,16 @@ class CoursesViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let indexPath = tableView.indexPathForSelectedRow
-        
-        
         let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as UITableViewCell!
-        print(currentCell.textLabel!.text)
+        //print(currentCell.textLabel!.text)
+        //print(objectArray[indexPath!.section].sectionName)
         tableView.deselectRowAtIndexPath(indexPath!, animated: true)
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let destination = storyboard.instantiateViewControllerWithIdentifier("CourseController") as! CourseController
-        destination.toPass = currentCell.textLabel!.text;
+        destination.programName = objectArray[indexPath!.section].sectionName
+        destination.courseNum = currentCell.textLabel!.text;
+        
         navigationController?.pushViewController(destination, animated: true)
-        //let row = indexPath.row
-        //print("Row: \(row)")
         
         
     }
