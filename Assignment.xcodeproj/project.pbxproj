@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		675523C21BFEFB9D008CE5AA /* NewsItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675523C11BFEFB9D008CE5AA /* NewsItemController.swift */; settings = {ASSET_TAGS = (); }; };
 		675F97601BF1587800EF5F15 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675F975F1BF1587800EF5F15 /* AppDelegate.swift */; };
 		675F97641BF1587800EF5F15 /* CoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675F97631BF1587800EF5F15 /* CoursesViewController.swift */; };
 		675F97671BF1587900EF5F15 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 675F97651BF1587900EF5F15 /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		675523C11BFEFB9D008CE5AA /* NewsItemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsItemController.swift; sourceTree = "<group>"; };
 		675F975C1BF1587800EF5F15 /* Assignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Assignment.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		675F975F1BF1587800EF5F15 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		675F97631BF1587800EF5F15 /* CoursesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 			children = (
 				675F975F1BF1587800EF5F15 /* AppDelegate.swift */,
 				67AFD6631BFE30890061E232 /* NewsViewController.swift */,
+				675523C11BFEFB9D008CE5AA /* NewsItemController.swift */,
 				675F97631BF1587800EF5F15 /* CoursesViewController.swift */,
 				67AFD6611BFE2FFE0061E232 /* CalenderViewController.swift */,
 				67AFD6EB1BFE62240061E232 /* CourseController.swift */,
@@ -147,6 +150,7 @@
 				675F97641BF1587800EF5F15 /* CoursesViewController.swift in Sources */,
 				675F97601BF1587800EF5F15 /* AppDelegate.swift in Sources */,
 				67AFD6EC1BFE62240061E232 /* CourseController.swift in Sources */,
+				675523C21BFEFB9D008CE5AA /* NewsItemController.swift in Sources */,
 				67AFD6621BFE2FFE0061E232 /* CalenderViewController.swift in Sources */,
 				67AFD6641BFE30890061E232 /* NewsViewController.swift in Sources */,
 			);
