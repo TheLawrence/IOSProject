@@ -67,6 +67,8 @@ class CourseController: UIViewController {
             
 
         }
+        classDetailsView.hidden = false
+        forumView.hidden = true
     }
     
     @IBAction func indexChanged(sender: AnyObject) {
