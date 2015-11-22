@@ -24,23 +24,97 @@
             </objects>
             <point key="canvasLocation" x="-845" y="-669"/>
         </scene>
-        <!--CalendarNavigation-->
+        <!--AgendaNavigation-->
         <scene sceneID="Wha-yJ-15e">
             <objects>
-                <navigationController title="CalendarNavigation" id="2m5-7p-MvT" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Calendar" image="first" id="sQK-oP-R2S"/>
+                <navigationController title="AgendaNavigation" id="2m5-7p-MvT" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Agenda" image="first" id="sQK-oP-R2S"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="y2F-VL-jmd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <animations/>
                     </navigationBar>
                     <connections>
-                        <segue destination="Za7-Rs-tOC" kind="relationship" relationship="rootViewController" id="MN9-5V-g77"/>
+                        <segue destination="We1-zu-Z68" kind="relationship" relationship="rootViewController" id="S89-BK-Cpq"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EUP-Sa-Zm2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-408" y="-719"/>
+        </scene>
+        <!--Agenda-->
+        <scene sceneID="SiN-nM-MQr">
+            <objects>
+                <tableViewController title="Agenda" id="We1-zu-Z68" customClass="AgendaViewController" customModule="Assignment" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="57" sectionHeaderHeight="28" sectionFooterHeight="28" id="b1c-IJ-fDU">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AgendaCell" rowHeight="60" id="RaE-Jr-5uF" customClass="AgendaCell" customModule="Assignment" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="320" height="60"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RaE-Jr-5uF" id="GVN-QD-tNT">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="8Jr-mx-fjk">
+                                            <rect key="frame" x="8" y="0.0" width="150" height="50"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WCR-XN-FAU">
+                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="14"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" red="0.71046401520000002" green="0.71046401520000002" blue="0.71046401520000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tKm-Ko-R3C">
+                                                    <rect key="frame" x="0.0" y="14" width="150" height="21"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uFK-H1-zCe">
+                                                    <rect key="frame" x="0.0" y="35" width="150" height="15"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="150" id="PTh-0i-XHw"/>
+                                                <constraint firstAttribute="height" constant="50" id="PjD-3E-loq"/>
+                                            </constraints>
+                                        </stackView>
+                                    </subviews>
+                                    <animations/>
+                                    <constraints>
+                                        <constraint firstItem="8Jr-mx-fjk" firstAttribute="leading" secondItem="GVN-QD-tNT" secondAttribute="leadingMargin" constant="2" id="1Ow-WK-vVc"/>
+                                        <constraint firstItem="8Jr-mx-fjk" firstAttribute="top" secondItem="GVN-QD-tNT" secondAttribute="topMargin" constant="-5" id="sNS-4z-lEa"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <animations/>
+                                <connections>
+                                    <outlet property="dateLabel" destination="uFK-H1-zCe" id="5xC-7h-1j9"/>
+                                    <outlet property="nameLabel" destination="tKm-Ko-R3C" id="Z2f-vn-qZe"/>
+                                    <outlet property="typeLabel" destination="WCR-XN-FAU" id="rtS-tl-Oge"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="We1-zu-Z68" id="fy9-Z3-f5C"/>
+                            <outlet property="delegate" destination="We1-zu-Z68" id="JFA-Ty-EGI"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Agenda" id="Kkd-u7-j7s"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y7E-VT-5FW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-44" y="-447"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -114,7 +188,7 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" selectedImage="first" systemItem="featured" id="t2l-I4-rKm"/>
-                    <navigationItem key="navigationItem" id="RCP-vp-JEM"/>
+                    <navigationItem key="navigationItem" title="News" id="RCP-vp-JEM"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uPH-ZC-hto" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -195,7 +269,7 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Courses" image="first" selectedImage="first" id="jwX-5A-TDz"/>
-                    <navigationItem key="navigationItem" id="zQF-1y-1wc"/>
+                    <navigationItem key="navigationItem" title="Courses" id="zQF-1y-1wc"/>
                     <connections>
                         <segue destination="j8s-vg-IeQ" kind="push" identifier="segue" id="S6v-z8-fc2"/>
                     </connections>
@@ -343,27 +417,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H4s-hO-ypT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-339" y="698"/>
-        </scene>
-        <!--Calendar-->
-        <scene sceneID="8pd-Jm-KFX">
-            <objects>
-                <viewController title="Calendar" id="Za7-Rs-tOC" customClass="CalenderViewController" customModule="Assignment" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="la8-eV-5f6"/>
-                        <viewControllerLayoutGuide type="bottom" id="WWM-E6-4u6"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="tcO-70-IMg">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Calendar" image="first" id="ggg-gq-jYO"/>
-                    <navigationItem key="navigationItem" id="IIh-VW-3E8"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Kct-Xa-aRc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="167" y="-378"/>
         </scene>
     </scenes>
     <resources>

@@ -7,14 +7,19 @@
 //
 
 import UIKit
-
+import Alamofire
+import SwiftyJSON
 class CoursesViewController: UITableViewController {
 
    
-    
+    var setId = "\"COMP4R\""
     var names = ["COMP": ["4977", "4976", "4711", "4560", "4735"], "BLAW": ["3600"]]
-    
-    
+    var myAPIKey = "H5Vvh0k8Nmb3JZLtUsx1RsD9xdoIUrtO"
+
+    var url: NSString!{
+        return String("https://api.mongolab.com/api/1/databases/iosproject/collections/set?q={\"_SetId\": \(setId)}&fo=true&apiKey=\(myAPIKey)")
+    }
+
     struct Objects {
         
         var sectionName : String!
@@ -25,10 +30,33 @@ class CoursesViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Courses"
-        for (key, value) in names {
+        /*for (key, value) in names {
             //print("\(key) -> \(value)")
             objectArray.append(Objects(sectionName: key, sectionObjects: value))
+        }*/
+        print(url)
+        let searchURL : NSURL = NSURL(string: url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)!
+        Alamofire.request(.GET, searchURL)
+            .responseJSON { response in
+                //print("Response JSON: \(response.result.value)")
+                if let json = response.result.value {
+                    let json = JSON(response.result.value!)
+ 
+                    for (key, value):(String, JSON) in json{
+                        //print("\(key) -> \(value)")
+                        //self.objectArray.append(Objects(sectionName: key, sectionObjects: value.stringValue))
+                        //print(key)
+                        //print(value)
+                        //print("hi")
+                        
+                    }
+                    //print(self.objectArray)
+                }
+                
+               
         }
+
+        
     }
 
     override func didReceiveMemoryWarning() {
