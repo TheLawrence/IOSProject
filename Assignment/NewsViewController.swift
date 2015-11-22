@@ -7,11 +7,17 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class NewsViewController: UITableViewController {
     
     var news = ["Announcements": ["Finals Schedule"], "Course News": ["COMP4977", "COMP4976"]]
     var testString = "long string of text that should get dot dot dotted because there is not enough room to display all of this junk. hello world."
+    
+    let apiKey = "PhtqFHoc1aUPEipHEtyCeI7SE8h-OIOf"
+    let dbName = "lawsarcomp4977"
+    let collectionName = "news"
     
     struct Objects {
         var sectionName: String!
@@ -25,9 +31,14 @@ class NewsViewController: UITableViewController {
         
         self.title = "News"
         
+        Alamofire.request(.GET, "https://api.mongolab.com/api/1/databases/\(dbName)/collections/\(collectionName)?apiKey=\(apiKey)")
+            .responseJSON { response in
+                print("Response JSON: \(response.result.value)")
+        }
+        
         for(key, value) in news
         {
-            print("\(key)) -> \(value)")
+            //print("\(key)) -> \(value)")
             objectArray.append(Objects(sectionName: key, sectionObjects: value))
         }
         
