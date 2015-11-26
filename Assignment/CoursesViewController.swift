@@ -14,7 +14,6 @@ class CoursesViewController: UITableViewController {
    
     var setId = "\"COMP4R\""
     var myAPIKey = "H5Vvh0k8Nmb3JZLtUsx1RsD9xdoIUrtO"
-    //var names = ["COMP": ["4977", "4976", "4711", "4560", "4735"], "BLAW": ["3600"]]
     var url: NSString!{
         return String("https://api.mongolab.com/api/1/databases/iosproject/collections/set?q={\"_SetId\": \(setId)}&fo=true&apiKey=\(myAPIKey)")
     }
