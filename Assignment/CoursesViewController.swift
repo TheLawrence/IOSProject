@@ -13,9 +13,8 @@ class CoursesViewController: UITableViewController {
 
    
     var setId = "\"COMP4R\""
-    var names = ["COMP": ["4977", "4976", "4711", "4560", "4735"], "BLAW": ["3600"]]
     var myAPIKey = "H5Vvh0k8Nmb3JZLtUsx1RsD9xdoIUrtO"
-
+    //var names = ["COMP": ["4977", "4976", "4711", "4560", "4735"], "BLAW": ["3600"]]
     var url: NSString!{
         return String("https://api.mongolab.com/api/1/databases/iosproject/collections/set?q={\"_SetId\": \(setId)}&fo=true&apiKey=\(myAPIKey)")
     }
@@ -25,7 +24,35 @@ class CoursesViewController: UITableViewController {
         var sectionName : String!
         var sectionObjects : [String]!
     }
+    
     var objectArray = [Objects]()
+    
+    required init(coder aDecoder: NSCoder!) {
+        
+        super.init(coder: aDecoder)!
+        let searchURL : NSURL = NSURL(string: url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)!
+        Alamofire.request(.GET, searchURL)
+            .responseJSON { response in
+                //print("Response JSON: \(response.result.value)")
+                if let json = response.result.value {
+                    let json = JSON(response.result.value!)
+                    
+                    for (key, value):(String, JSON) in json["courses"][0]{
+                        //print("\(key) -> \(value)")
+                        
+                        var courses = [String]()
+                        for yo in value
+                        {
+                            print(String(yo.1))
+                            courses.append(String(yo.1))
+                        }
+                        
+                        self.objectArray.append(Objects(sectionName: key, sectionObjects: courses))
+                        print("Values loaded")
+                    }
+                }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,28 +61,11 @@ class CoursesViewController: UITableViewController {
             //print("\(key) -> \(value)")
             objectArray.append(Objects(sectionName: key, sectionObjects: value))
         }*/
-        print(url)
-        let searchURL : NSURL = NSURL(string: url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)!
-        Alamofire.request(.GET, searchURL)
-            .responseJSON { response in
-                //print("Response JSON: \(response.result.value)")
-                if let json = response.result.value {
-                    let json = JSON(response.result.value!)
- 
-                    for (key, value):(String, JSON) in json{
-                        //print("\(key) -> \(value)")
-                        //self.objectArray.append(Objects(sectionName: key, sectionObjects: value.stringValue))
-                        //print(key)
-                        //print(value)
-                        //print("hi")
-                        
-                    }
-                    //print(self.objectArray)
-                }
-                
-               
-        }
-
+        
+       
+        
+        print("View Loaded")
+        
         
     }
 
@@ -77,10 +87,11 @@ class CoursesViewController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         // Configure the cell...
         cell.textLabel?.text = objectArray[indexPath.section].sectionObjects[indexPath.row]
+        print("Cells loaded")
         return cell
     }
     
