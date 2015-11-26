@@ -31,9 +31,11 @@ class NewsViewController: UITableViewController {
         
         self.title = "News"
         
-        Alamofire.request(.GET, "https://api.mongolab.com/api/1/databases/\(dbName)/collections/\(collectionName)?apiKey=\(apiKey)")
+        Alamofire.request(.GET, "https://api.mongolab.com/api/1/databases/lawsarcomp4977/collections/news?q={'newsType':'announcement'}&apiKey=PhtqFHoc1aUPEipHEtyCeI7SE8h-OIOf")
             .responseJSON { response in
-                print("Response JSON: \(response.result.value)")
+                let testing = response.result.value
+                print("hello \(testing)")
+                //print("Response JSON: \(response.result.value)")
         }
         
         for(key, value) in news
