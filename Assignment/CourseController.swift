@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class CourseController: UIViewController {
     
@@ -28,44 +30,35 @@ class CourseController: UIViewController {
     @IBOutlet weak var forumView: UIView!
     
 
-    var values = [String]!()
+    var myAPIKey = "H5Vvh0k8Nmb3JZLtUsx1RsD9xdoIUrtO"
     
-    var crsDeetz : [String: [String]] = [
-        "4977":
-        [
-            "iOS Application Development for iPhone and iPad",
-            "D'arcy Smith",
-            "dsmith25@my.bcit.ca",
-            "SW2-301",
-            "TBA.",
-            "This hands-on course is designed for students who are able to code medium sized applications in an Object Oriented language. Students design and develop apps to Apple standards for the latest iOS platforms."
-        ],
-        "4976":
-        [
-            "Web Application with ASP.NET",
-            "Medhat Elmasry",
-            "melmasry1@my.bcit.ca",
-            "SW2-121",
-            "By appointment only",
-            "This hands-on course is designed for those who are already familiar with an Object Oriented programming language such as Java or C++. Students are introduced to web application  .   development using C# and the Microsoft ASP.NET Framework."
-        ]
-    ]
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         segmentedControl.setEnabled( true, forSegmentAtIndex: 0)
         self.title =  programName + " " + courseNum
-        if((crsDeetz[courseNum]?.isEmpty) != nil){
-            values = crsDeetz[courseNum]
-            self.crsName.text = values[0]
-            self.tchName.text = values[1]
-            self.email.text = values[2]
-            self.officeLoc.text = values[3]
-            self.officeHrs.text = values[4]
-            self.courseDesc.text = values[5]
-            
-
+        var url: NSString!{
+            return String("https://api.mongolab.com/api/1/databases/iosproject/collections/course?q={\"_courseId\": \(courseNum)}&fo=true&apiKey=\(myAPIKey)")
+        }
+        let searchURL : NSURL = NSURL(string: url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)!
+        var courses = [String]()
+        Alamofire.request(.GET, searchURL)
+            .responseJSON { response in
+                //print("Response JSON: \(response.result.value)")
+                if let json = response.result.value {
+                    let json = JSON(response.result.value!)
+                    
+                    for yo in json
+                    {
+                        //print(String(yo.1))
+                        courses.append(String(yo.1))
+                    }
+                    self.crsName.text = courses[6]
+                    self.tchName.text = courses[1]
+                    self.email.text = courses[7]
+                    self.officeLoc.text = courses[4]
+                    self.officeHrs.text = courses[5]
+                    self.courseDesc.text = courses[3]                }
         }
         classDetailsView.hidden = false
         forumView.hidden = true
