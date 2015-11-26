@@ -29,20 +29,23 @@ class NewsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "News"
-        
-        Alamofire.request(.GET, "https://api.mongolab.com/api/1/databases/lawsarcomp4977/collections/news?q={'newsType':'announcement'}&apiKey=PhtqFHoc1aUPEipHEtyCeI7SE8h-OIOf")
+        //self.title = "News"
+        var title: String
+        Alamofire.request(.GET, "https://api.mongolab.com/api/1/databases/\(dbName)/collections/\(collectionName)?apiKey=\(apiKey)")
             .responseJSON { response in
                 let testing = response.result.value
                 print("hello \(testing)")
                 //print("Response JSON: \(response.result.value)")
+                title = response.result.value[1][]
         }
         
         for(key, value) in news
         {
-            //print("\(key)) -> \(value)")
+            //print("\(key)) -> \(value)")z
             objectArray.append(Objects(sectionName: key, sectionObjects: value))
         }
+        
+        self.title = title
         
     }
     
