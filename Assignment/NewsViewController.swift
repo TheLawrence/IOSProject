@@ -23,7 +23,7 @@ class NewsViewController: UITableViewController {
     
     var url: NSString!{
         //all
-        return String("https://api.mongolab.com/api/1/databases/\(dbName)/collections/\(collectionName)?q={\"userSet\":\(setR)}&c=true&apiKey=\(apiKey)")
+        return String("https://api.mongolab.com/api/1/databases/\(dbName)/collections/\(collectionName)?apiKey=\(apiKey)")
         //COMP4D
         //return String("https://api.mongolab.com/api/1/databases/\(dbName)/collections/\(collectionName)?q={\"userSet\": \(setD)"}&apiKey=\(apiKey)")
         //COMP4R
