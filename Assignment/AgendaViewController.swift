@@ -12,6 +12,7 @@ import SwiftyJSON
 
 class AgendaViewController: UITableViewController {
   var objectArray = [agendaArray]()
+  var agendaData : [Agenda] = []
   
   override func loadView() {
     super.loadView()
@@ -126,7 +127,7 @@ class AgendaViewController: UITableViewController {
           }
           
           dispatch_async(dispatch_get_main_queue()) {
-            self.sort(agendaData)
+            self.sort(self.agendaData)
             self.tableView.reloadData()
           }
           

@@ -10,7 +10,7 @@
         <scene sceneID="9hh-Ss-Idw">
             <objects>
                 <navigationController title="CoursesNavigation" id="hDi-n9-WOd" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Courses" image="first" id="EiE-E2-M9V"/>
+                    <tabBarItem key="tabBarItem" title="Courses" image="courses" selectedImage="courses" id="EiE-E2-M9V"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="YCP-mR-TYN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -28,7 +28,7 @@
         <scene sceneID="Wha-yJ-15e">
             <objects>
                 <navigationController title="AgendaNavigation" id="2m5-7p-MvT" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Agenda" image="first" id="sQK-oP-R2S"/>
+                    <tabBarItem key="tabBarItem" title="Agenda" image="agenda" selectedImage="agenda" id="sQK-oP-R2S"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="y2F-VL-jmd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -143,7 +143,7 @@
         <scene sceneID="JLk-9w-ZVY">
             <objects>
                 <navigationController title="NewsNavigation" id="XXF-WU-gW6" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="News" image="first" id="9tJ-vJ-6r4"/>
+                    <tabBarItem key="tabBarItem" title="News" image="news" selectedImage="news" id="9tJ-vJ-6r4"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Hcm-3X-YfX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -267,7 +267,7 @@
                             <outlet property="delegate" destination="aYL-bM-ImD" id="TRp-yi-rfq"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Courses" image="first" selectedImage="first" id="jwX-5A-TDz"/>
+                    <tabBarItem key="tabBarItem" title="Courses" image="courses" selectedImage="courses" id="jwX-5A-TDz"/>
                     <navigationItem key="navigationItem" title="Courses" id="zQF-1y-1wc"/>
                     <connections>
                         <segue destination="j8s-vg-IeQ" kind="push" identifier="segue" id="S6v-z8-fc2"/>
@@ -419,6 +419,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="agenda" width="32" height="32"/>
+        <image name="courses" width="32" height="32"/>
         <image name="first" width="30" height="30"/>
+        <image name="news" width="32" height="32"/>
     </resources>
 </document>
