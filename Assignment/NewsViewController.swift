@@ -12,7 +12,6 @@ import SwiftyJSON
 
 class NewsViewController: UITableViewController {
     
-    var news = ["Announcements": ["Finals Schedule"], "Course News": ["COMP4977", "COMP4976"]]
     var testString = "long string of text that should get dot dot dotted because there is not enough room to display all of this junk. hello world."
     
     let apiKey = "PhtqFHoc1aUPEipHEtyCeI7SE8h-OIOf"
@@ -21,11 +20,16 @@ class NewsViewController: UITableViewController {
     let setR = "\"COMP4R\""
     let setD = "\"COMP4D\""
     
+    var announcements: [String] = []
+    var courseNews: [String] = []
+    var subtitles: [String] = []
+    var test = 0
+    
     var url: NSString!{
         //all
         return String("https://api.mongolab.com/api/1/databases/\(dbName)/collections/\(collectionName)?apiKey=\(apiKey)")
         //COMP4D
-        //return String("https://api.mongolab.com/api/1/databases/\(dbName)/collections/\(collectionName)?q={\"userSet\": \(setD)"}&apiKey=\(apiKey)")
+        //return String("https://api.mongolab.com/api/1/databases/\(dbName)/collections/\(collectionName)?q={\"userSet\": \(setD)}&apiKey=\(apiKey)")
         //COMP4R
         //return String("https://api.mongolab.com/api/1/databases/\(dbName)/collections/\(collectionName)?q={\"userSet\": \(setR)}&apiKey=\(apiKey)")
     }
@@ -44,22 +48,41 @@ class NewsViewController: UITableViewController {
       
         self.title = "News"
         
+        test = 0
+        
         let searchURL : NSURL = NSURL(string: url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)!
         
-        print(searchURL)
+        //print(searchURL)
         
         Alamofire.request(.GET, searchURL)
             .responseJSON { response in
                 if let json = response.result.value {
                     let json = JSON(response.result.value!)
-                    print("\(json)")
+                    for (key, value):(String, JSON) in json {
+                        
+                        if value["newsType"] == "announcement" {
+                            self.announcements.append(value["newsHeader"].stringValue)
+                            self.subtitles.append(value["newsDetail"].stringValue)
+                        }
+                        if value["newsType"] == "Course News" {
+                            if value["userSet"].stringValue == "COMP4D" {
+                                continue
+                            }
+                            self.courseNews.append(value["courseNum"].stringValue)
+                            self.subtitles.append(value["newsDetail"].stringValue)
+                        }
+                    }
+                    print("\(self.announcements)")
+                    print("\(self.courseNews)")
+                    
+                    self.objectArray.append(Objects(sectionName: "Announcements", sectionObjects: self.announcements))
+                    self.objectArray.append(Objects(sectionName: "Course News", sectionObjects: self.courseNews))
+                    
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.tableView.reloadData()
+                    }
+
                 }
-        }
-        
-        for(key, value) in news
-        {
-            //print("\(key)) -> \(value)")
-            objectArray.append(Objects(sectionName: key, sectionObjects: value))
         }
         
     }
@@ -84,7 +107,8 @@ class NewsViewController: UITableViewController {
         
         // Configure the cell...
         cell.textLabel?.text = objectArray[indexPath.section].sectionObjects[indexPath.row]
-        cell.detailTextLabel?.text = testString
+        cell.detailTextLabel?.text = subtitles[test]
+        test++
         
         return cell
     }
@@ -106,7 +130,7 @@ class NewsViewController: UITableViewController {
         let destination = storyboard.instantiateViewControllerWithIdentifier("NewsItemController") as! NewsItemController
         destination.pageTitle = objectArray[indexPath!.section].sectionName
         destination.newsTitle = currentCell.textLabel!.text
-        destination.fullNews = testString
+        //destination.fullNews = testString
         navigationController?.pushViewController(destination, animated: true)
     }
     
