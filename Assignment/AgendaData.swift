@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-let agendaData = [
+var agendaData : [Agenda] = [/**
     Agenda(name:"Course 4977", type:"Quiz", date: NSDate()),
     Agenda(name: "Course 4560", type: "Lecture", date: NSDate()),
-    Agenda(name: "Course 4560", type: "Lab", date: NSDate()) ]
+    Agenda(name: "Course 4560", type: "Lab", date: NSDate()) **/]
