@@ -18,6 +18,17 @@ class NewsViewController: UITableViewController {
     let apiKey = "PhtqFHoc1aUPEipHEtyCeI7SE8h-OIOf"
     let dbName = "lawsarcomp4977"
     let collectionName = "news"
+    let setR = "\"COMP4R\""
+    let setD = "\"COMP4D\""
+    
+    var url: NSString!{
+        //all
+        return String("https://api.mongolab.com/api/1/databases/\(dbName)/collections/\(collectionName)?q={\"userSet\":\(setR)}&c=true&apiKey=\(apiKey)")
+        //COMP4D
+        //return String("https://api.mongolab.com/api/1/databases/\(dbName)/collections/\(collectionName)?q={\"userSet\": \(setD)"}&apiKey=\(apiKey)")
+        //COMP4R
+        //return String("https://api.mongolab.com/api/1/databases/\(dbName)/collections/\(collectionName)?q={\"userSet\": \(setR)}&apiKey=\(apiKey)")
+    }
     
     struct Objects {
         var sectionName: String!
@@ -29,23 +40,25 @@ class NewsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //self.title = "News"
-        var title: String
-        Alamofire.request(.GET, "https://api.mongolab.com/api/1/databases/\(dbName)/collections/\(collectionName)?apiKey=\(apiKey)")
+        self.title = "News"
+        
+        let searchURL : NSURL = NSURL(string: url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)!
+        
+        print(searchURL)
+        
+        Alamofire.request(.GET, searchURL)
             .responseJSON { response in
-                let testing = response.result.value
-                print("hello \(testing)")
-                //print("Response JSON: \(response.result.value)")
-                title = response.result.value[1][]
+                if let json = response.result.value {
+                    let json = JSON(response.result.value!)
+                    print("\(json)")
+                }
         }
         
         for(key, value) in news
         {
-            //print("\(key)) -> \(value)")z
+            //print("\(key)) -> \(value)")
             objectArray.append(Objects(sectionName: key, sectionObjects: value))
         }
-        
-        self.title = title
         
     }
     
