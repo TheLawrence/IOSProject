@@ -16,16 +16,18 @@ class AgendaCell: UITableViewCell {
     
     @IBOutlet weak var dateLabel: UILabel!
     
-    var agenda: Agenda! {
-        didSet {
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.timeStyle = .LongStyle
-            typeLabel.text = agenda.type
-            nameLabel.text = agenda.name
-            dateLabel.text = dateFormatter.stringFromDate((agenda.date)!)
-        }
+  var agenda: Agenda! {
+    didSet {
+      let dateFormatter = NSDateFormatter()
+      dateFormatter.dateStyle = .LongStyle
+      dateFormatter.timeZone = NSTimeZone.localTimeZone()
+      dateFormatter.dateFormat = "yyyy-MM-dd hh:mm"
+      typeLabel.text = agenda.type
+      nameLabel.text = agenda.name
+      dateLabel.text = dateFormatter.stringFromDate((agenda.date)!)
     }
-    
+  }
+  
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

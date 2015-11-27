@@ -7,46 +7,129 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class AgendaViewController: UITableViewController {
-    var agendas:[Agenda] = agendaData
+  var objectArray = [agendaArray]()
+  
+  override func loadView() {
+    super.loadView()
     
+  }
+  
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    getData("calendar", database: "iosproject", apiKey: "wT2XOfoaP8f0Q1akvhXjKg0wpqqkgSX_")
     
+    self.tableView.separatorColor = UIColor.redColor()
+    self.tableView.layoutMargins = UIEdgeInsetsZero;
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.tableView.separatorColor = UIColor.redColor()
-        self.tableView.layoutMargins = UIEdgeInsetsZero;
-        
-        self.tableView.tableFooterView = UIView(frame:CGRectZero)
-        // Do any additional setup after loading the view, typically from a nib.
+    self.tableView.tableFooterView = UIView(frame:CGRectZero)
+    // Do any additional setup after loading the view, typically from a nib.
+  }
+  
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+  }
+  
+  override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    return objectArray.count
+  }
+  
+  override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return objectArray[section].sectionObjects.count
+  }
+  
+  override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    
+    return objectArray[section].sectionName
+  }
+  
+  override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath)
+    -> UITableViewCell {
+      let cell = tableView.dequeueReusableCellWithIdentifier("AgendaCell", forIndexPath: indexPath) as! AgendaCell
+      
+      
+      
+      let agenda = objectArray[indexPath.section].sectionObjects[indexPath.row] as Agenda
+      cell.agenda = agenda
+      
+      cell.separatorInset = UIEdgeInsetsZero
+      cell.layoutMargins = UIEdgeInsetsZero
+      
+      return cell
+  }
+  
+  func sort(agendaData: [Agenda]){
+    let cal = NSCalendar.currentCalendar()
+    var components = cal.components([.Era, .Year, .Month, .Day], fromDate:NSDate())
+    let today = cal.dateFromComponents(components)!
+    var todayArray = [Agenda]()
+    var tomorrowArray = [Agenda]()
+    
+    for item:Agenda in agendaData {
+      components = cal.components([.Era, .Year, .Month, .Day], fromDate:item.date!);
+      let otherDate = cal.dateFromComponents(components)!
+      
+      if(today.isEqualToDate(otherDate)) {
+        print(item.date);
+        todayArray.append(item)
+      }
+      else {
+        tomorrowArray.append(item)
+      }
+      
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    objectArray.append(agendaArray(sectionName: "Today", sectionObjects: todayArray))
+    objectArray.append(agendaArray(sectionName: "Future", sectionObjects: tomorrowArray))
+    
+  }
+  
+  func parseJSON(json: JSON) {
+    let name = json["name"].string
+    let type = json["type"].string
+    let set = json["set"].string
+    
+    let dateFormatter = NSDateFormatter()
+    dateFormatter.dateStyle = .LongStyle
+    dateFormatter.timeZone = NSTimeZone.localTimeZone()
+    dateFormatter.dateFormat = "yyyy-MM-dd hh:mm a"
+    
+    let dateString = json["date"].string
+    var date = dateFormatter.dateFromString(dateString!)
+    var recurring = json["recurring"].boolValue
+    let item = Agenda(name: name!, type: type!, date: date!, recurring: recurring, set: set!)
+    agendaData.append(item)
+  }
+  
+  func getData( coll: String!, database: String!, apiKey: String!){
+    var recievedData : [Agenda] = []
+    var url: NSString!{
+      
+      return String("https://api.mongolab.com/api/1/databases/\(database)/collections/\(coll)?apiKey=\(apiKey)")
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+    let searchURL : NSURL = NSURL(string: url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)!
+    Alamofire.request(.GET, searchURL)
+      .responseJSON
+      { response in
+        if let json = response.result.value {
+          let json = JSON(response.result.value!)
+          for (key, value):(String, JSON) in json{
+            self.parseJSON(value)
+          }
+          
+          dispatch_async(dispatch_get_main_queue()) {
+            self.sort(agendaData)
+            self.tableView.reloadData()
+          }
+          
+        }
     }
-    
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return agendas.count
-    }
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath)
-        -> UITableViewCell {
-            let cell = tableView.dequeueReusableCellWithIdentifier("AgendaCell", forIndexPath: indexPath) as! AgendaCell
-            
-            let agenda = agendas[indexPath.row] as Agenda
-            cell.agenda = agenda
-            
-            cell.separatorInset = UIEdgeInsetsZero
-            cell.layoutMargins = UIEdgeInsetsZero
-            
-            return cell
-    }
-    
+  }
 }
 
