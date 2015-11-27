@@ -14,7 +14,6 @@
 		675F97671BF1587900EF5F15 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 675F97651BF1587900EF5F15 /* Main.storyboard */; };
 		675F97691BF1587900EF5F15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 675F97681BF1587900EF5F15 /* Assets.xcassets */; };
 		675F976C1BF1587900EF5F15 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 675F976A1BF1587900EF5F15 /* LaunchScreen.storyboard */; };
-		67A205AA1C018E1600DB2682 /* AgendaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A205A91C018E1600DB2682 /* AgendaData.swift */; };
 		67A205AC1C018E4B00DB2682 /* Agenda.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A205AB1C018E4B00DB2682 /* Agenda.swift */; };
 		67A205AE1C018E5B00DB2682 /* AgendaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A205AD1C018E5B00DB2682 /* AgendaCell.swift */; };
 		67AFD6621BFE2FFE0061E232 /* AgendaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67AFD6611BFE2FFE0061E232 /* AgendaViewController.swift */; };
@@ -33,7 +32,6 @@
 		675F97681BF1587900EF5F15 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		675F976B1BF1587900EF5F15 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		675F976D1BF1587900EF5F15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		67A205A91C018E1600DB2682 /* AgendaData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgendaData.swift; sourceTree = "<group>"; };
 		67A205AB1C018E4B00DB2682 /* Agenda.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Agenda.swift; sourceTree = "<group>"; };
 		67A205AD1C018E5B00DB2682 /* AgendaCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgendaCell.swift; sourceTree = "<group>"; };
 		67AFD6611BFE2FFE0061E232 /* AgendaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgendaViewController.swift; sourceTree = "<group>"; };
@@ -100,7 +98,6 @@
 			isa = PBXGroup;
 			children = (
 				67AFD6611BFE2FFE0061E232 /* AgendaViewController.swift */,
-				67A205A91C018E1600DB2682 /* AgendaData.swift */,
 				67A205AB1C018E4B00DB2682 /* Agenda.swift */,
 				67A205AD1C018E5B00DB2682 /* AgendaCell.swift */,
 			);
@@ -257,7 +254,6 @@
 				675F97641BF1587800EF5F15 /* CoursesViewController.swift in Sources */,
 				675F97601BF1587800EF5F15 /* AppDelegate.swift in Sources */,
 				67AFD6EC1BFE62240061E232 /* CourseController.swift in Sources */,
-				67A205AA1C018E1600DB2682 /* AgendaData.swift in Sources */,
 				675523C21BFEFB9D008CE5AA /* NewsItemController.swift in Sources */,
 				67A205AE1C018E5B00DB2682 /* AgendaCell.swift in Sources */,
 				67AFD6621BFE2FFE0061E232 /* AgendaViewController.swift in Sources */,

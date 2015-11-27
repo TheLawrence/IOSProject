@@ -55,6 +55,8 @@ class CoursesViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController!.navigationBar.barTintColor = UIColor(red: 0/255.0, green: 60/255.0, blue: 113/255.0, alpha: 0)
+        navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
         self.title = "Courses"
         /*for (key, value) in names {
             //print("\(key) -> \(value)")

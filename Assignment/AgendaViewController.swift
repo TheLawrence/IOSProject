@@ -12,6 +12,7 @@ import SwiftyJSON
 
 class AgendaViewController: UITableViewController {
   var objectArray = [agendaArray]()
+  var agendaData : [Agenda] = []
   
   override func loadView() {
     super.loadView()
@@ -21,6 +22,8 @@ class AgendaViewController: UITableViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    navigationController!.navigationBar.barTintColor = UIColor(red: 0/255.0, green: 60/255.0, blue: 113/255.0, alpha: 0)
+    navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
     getData("calendar", database: "iosproject", apiKey: "wT2XOfoaP8f0Q1akvhXjKg0wpqqkgSX_")
     
     self.tableView.separatorColor = UIColor.redColor()
@@ -124,7 +127,7 @@ class AgendaViewController: UITableViewController {
           }
           
           dispatch_async(dispatch_get_main_queue()) {
-            self.sort(agendaData)
+            self.sort(self.agendaData)
             self.tableView.reloadData()
           }
           
