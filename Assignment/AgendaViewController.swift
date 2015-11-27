@@ -21,6 +21,8 @@ class AgendaViewController: UITableViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    navigationController!.navigationBar.barTintColor = UIColor(red: 0/255.0, green: 60/255.0, blue: 113/255.0, alpha: 0)
+    navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
     getData("calendar", database: "iosproject", apiKey: "wT2XOfoaP8f0Q1akvhXjKg0wpqqkgSX_")
     
     self.tableView.separatorColor = UIColor.redColor()

@@ -28,7 +28,9 @@ class NewsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        navigationController!.navigationBar.barTintColor = UIColor(red: 0/255.0, green: 60/255.0, blue: 113/255.0, alpha: 0)
+        navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+      
         self.title = "News"
         
         Alamofire.request(.GET, "https://api.mongolab.com/api/1/databases/\(dbName)/collections/\(collectionName)?apiKey=\(apiKey)")
