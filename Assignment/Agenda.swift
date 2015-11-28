@@ -23,6 +23,10 @@ struct Agenda {
     self.set = set
     self.recurring = recurring
   }
+  
+  init(){
+    
+  }
 }
 
 struct agendaArray {
