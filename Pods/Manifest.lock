@@ -1,22 +1,31 @@
 PODS:
   - Alamofire (3.1.2)
+  - CryptoSwift (0.1.1)
   - SwiftyJSON (2.3.1)
 
 DEPENDENCIES:
   - Alamofire (~> 3.0)
+  - CryptoSwift (from `https://github.com/krzyzanowskim/CryptoSwift`, branch `master`)
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
 
 EXTERNAL SOURCES:
+  CryptoSwift:
+    :branch: master
+    :git: https://github.com/krzyzanowskim/CryptoSwift
   SwiftyJSON:
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 CHECKOUT OPTIONS:
+  CryptoSwift:
+    :commit: f23720f6b398169d7407ca8b2c4a590238128686
+    :git: https://github.com/krzyzanowskim/CryptoSwift
   SwiftyJSON:
     :commit: 10f67900bdf2fb0faba3371249a6fefdcaa880c5
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 SPEC CHECKSUMS:
   Alamofire: 7c16ca65f3c7e681fd925fd7f2dec7747ff96855
+  CryptoSwift: 80b014431f6ef249acb6004efc93a8f65f5f7781
   SwiftyJSON: 592b53bee5ef3dd9b3bebc6b9cb7ee35426ae8c3
 
 COCOAPODS: 0.39.0
