@@ -17,26 +17,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var loginField: UITextField!
     let nextField = [1:2]
-    var result = true;
+    var userExists = true;
+    var passwordMatches = true;
 
 
     @IBAction func loginPressed(sender: AnyObject) {
       var user = self.loginField.text
-      var password = self.passwordField.text
+      var password = self.passwordField.text?.md5()
       
-      
-      var isUser = getUser("users", database: "iosproject", apiKey: "wT2XOfoaP8f0Q1akvhXjKg0wpqqkgSX_", user: user, password: password)
-      
-      
-      if (user == "gggg" && password == "vvvv"){
-        let tabBarController = self.storyboard?.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.window?.rootViewController = tabBarController
-
-      }
-      
-      print (user)
-      print (password)
+      var isUser = manageUser("users", database: "iosproject", apiKey: "wT2XOfoaP8f0Q1akvhXjKg0wpqqkgSX_", username: user, password: password)
     }
   
     override func viewDidLoad() {
@@ -50,6 +39,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             textField.delegate = self
           }
         }
+      
 
     }
 
@@ -74,42 +64,83 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
       }
       // Return false here to avoid Next/Return key doing anything
       return false
-    }
-  
-  func getUser( coll: String!, database: String!, apiKey: String!, user: String!, password: String!) -> Bool{
-    var recievedData : [Agenda] = []
-    var url: NSString!{
-      return String("https://api.mongolab.com/api/1/databases/\(database)/collections/\(coll)?q={\"studentNumber\":\"\(user)\"}&apiKey=\(apiKey)")
-    }
-    
-    print(url)
-    
-    let searchURL : NSURL = NSURL(string: url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)!
-    Alamofire.request(.GET, searchURL)
-      .responseJSON
-      { response in
-        if let json = response.result.value {
-          let json = JSON(response.result.value!)
-          if (json.stringValue == ""){
-            self.result = false
-            dispatch_async(dispatch_get_main_queue()) {
-              self.loginError.text = "Unrecognised Credentials"
-            }
-          }
 
-          for (key, value):(String, JSON) in json{
-            self.parseJSON(value)
-            self.checkPassword(value["password"].stringValue, inputPassword: password)
-          }
-        }
-    }
-    return result
   }
   
-  func checkPassword(userPassword:String, inputPassword:String){
+  
+  func manageUser( coll: String!, database: String!, apiKey: String!, username: String!, password: String!) -> Bool{
+    var url: NSString!{
+      return String("https://api.mongolab.com/api/1/databases/\(database)/collections/\(coll)?q={\"studentNumber\":\"\(username)\"}&apiKey=\(apiKey)")
+    }
+
+    let searchURL : NSURL = NSURL(string: url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)!
+
+    self.alamoRequest(searchURL, password: password){ response in
+      if ((response) != nil){
+        let tabBarController = self.storyboard?.instantiateViewControllerWithIdentifier("TabBarController") as! UITabBarController
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.window?.rootViewController = tabBarController
+      } 
+    }
+    
+    return false
+  }
+  
+  func alamoRequest(url: NSURL, password:String, completionHandler: (Bool?) -> ()) {
+    makeCall(url, password: password, completionHandler: completionHandler)
+  }
+  
+  func makeCall(url: NSURL, password: String, completionHandler: (Bool?) -> ()) {
+    
+    Alamofire.request(.GET, url).responseJSON
+      { response in
+        if let json = response.result.value
+        {
+          let json = JSON(response.result.value!)
+          
+          var isUserValid = self.isUserExist(json);
+          var retrievedPassword = "";
+          var doesPasswordMatch = false
+          
+          if(isUserValid)
+          {
+            for (key, value):(String, JSON) in json
+            {
+              self.parseJSON(value)
+              retrievedPassword = value["password"].stringValue
+            }
+          }
+          
+          doesPasswordMatch = self.checkPassword(retrievedPassword, inputPassword: password)
+          
+          if (isUserValid && doesPasswordMatch){
+            completionHandler(true)
+          } else {
+            completionHandler(nil)
+          }
+          
+          
+        } //end json LET
+    }
+  }
+  
+
+  func isUserExist(result: JSON) -> Bool{
+    if (result.isEmpty){
+      dispatch_async(dispatch_get_main_queue()) {
+        self.loginError.text = "Unrecognised Username"
+      }
+      return false
+    }
+    return true
+  }
+  
+  func checkPassword(userPassword:String, inputPassword:String) -> Bool{
     if(userPassword != inputPassword){
-      self.loginError.text = "Unrecognised Credentials"
-    } 
+      self.loginError.text = "Unrecognised Password"
+      return false
+    }
+    return true;
   }
   
   func parseJSON(json: JSON) {
@@ -118,8 +149,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     let studentNumber = json["studentNumber"].string
     
     user = User(name: name!, set: set!, studentNumber: studentNumber!)
-    print(user.name!)
   }
 
-
 }
+
